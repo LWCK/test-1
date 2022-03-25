@@ -36,3 +36,38 @@
     transform: rotate(360deg);
   }
 }
+
+
+/* //// */
+
+
+body{
+  color: white;
+  background-color: rgb(49, 0, 105)
+}
+
+.container-fluid {
+  margin: 0 auto;
+
+}
+.row>.col{
+  text-align: center;
+  padding:1em
+}
+.App{
+  padding:2em
+}
+.border{
+  border: 1px solid;
+}
+
+.border2{
+  border: 2px solid;
+}
+h2{
+  margin-left: 50px
+}
+.upTable{
+  font-weight: bold
+}
+/* .btn{} */
