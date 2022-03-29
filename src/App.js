@@ -39,7 +39,7 @@ function App() {
     )
       .then((response) => response.text())
       .then((result) => {
-        const resultat = users.filter((user) => user.id != id);
+        const resultat = users.filter((user) => user.id !== id);
         setUsers(resultat);
       })
       .catch((error) => console.log("error", error));
@@ -165,102 +165,63 @@ function App() {
             </h2>
           </div>
         </div>
-        <div className="container">
-          <div className="row upTable">
-            <div className="col border">#</div>
-            <div className="col border">Noms :</div>
-            <div className="col border">Emails :</div>
-            <div className="col border">Téléphones :</div>
-            <div className="col border">Actions :</div>
-          </div>
-          {users.map((item) => (
-            <div className="row" key={item.id}>
-              <div className="col border">{item.id}</div>
-              <div className="col border">{item.nom}</div>
-              <div className="col border">{item.email}</div>
-              <div className="col border">{item.tel}</div>
-              <div className="col border">
-                <button
-                  className="btn btn-warning"
-                  onClick={() => handleEdit(item)}
-                >
-                  <i className="fa-solid fa-pen-to-square"></i>
-                </button>{" "}
-                <button
-                  className="btn btn-danger"
-                  onClick={() => handleDelete(item.id)}
-                  value={item.id}
-                >
-                  <i className="fa-solid fa-trash"></i>
-                </button>
-              </div>
+        {/* <div className="container-fluid"> */}
+        <div className="row upTable">
+          <div className="col border">#</div>
+          <div className="col-2 border">Noms :</div>
+          <div className="col-4 border">Emails :</div>
+          <div className="col-2 border">Téléphones :</div>
+          <div className="col-2 border">Actions :</div>
+        </div>
+        {users.map((item) => (
+          <div className="row" key={item.id}>
+            <div className="col border">
+              <p className="my-3">{item.id}</p>
             </div>
-          ))}{" "}
-          <div className="row">
-            <div className="col">
-              <div className="container">
-                <div className="row">
-                  {showForm && (
-                    <div className="col py-3">
-                      {/* ajouter */}
-                      <div>
-                        <h3>Ajouter un utilisateur :</h3>
+            <div className="col-2 border">
+              <p className="my-3">{item.nom}</p>
+            </div>
+            <div className="col-4 border">
+              <p className="my-3">{item.email}</p>
+            </div>
+            <div className="col-2 border">
+              <p className="my-3">{item.tel}</p>
+            </div>
+            <div className="col-2 border">
+              <button
+                className="my-2 btn btn-warning"
+                onClick={() => handleEdit(item)}
+              >
+                <i className="fa-solid fa-pen-to-square"></i>
+              </button>{" "}
+              <button
+                className="my-2 btn btn-danger"
+                onClick={() => handleDelete(item.id)}
+                value={item.id}
+              >
+                <i className="fa-solid fa-trash"></i>
+              </button>
+            </div>
+          </div>
+        ))}{" "}
+        <div className="row">
+          <div className="col">
+            <div className="container">
+              <div className="row">
+                {showForm && (
+                  <div className="col py-3">
+                    {/* ajouter */}
+                    <div>
+                      <h3>Ajouter un utilisateur :</h3>
 
-                        <form onSubmit={handleAdd}>
-                          <input
-                            required
-                            className="mt-1"
-                            type="text"
-                            placeholder="Nom :"
-                            value={newUser}
-                            onChange={handleChangeNom}
-                          />
-                          <br />
-                          <input
-                            type="email"
-                            required
-                            className="mt-1"
-                            placeholder="Email :"
-                            value={newEmail}
-                            onChange={handleChangeEmail}
-                          />{" "}
-                          <input
-                            required
-                            className="mt-1"
-                            type="number"
-                            placeholder="Téléphones :"
-                            value={newTel}
-                            onChange={handleChangeTel}
-                          />
-                          <br />
-                          <button
-                            type="submit"
-                            className="btn btn-primary mt-2 mr-2"
-                          >
-                            Valider
-                          </button>{" "}
-                          <button
-                            className="btn btn-danger x_close mt-2"
-                            onClick={() => setShowForm(false)}
-                          >
-                            Annuler
-                          </button>
-                        </form>
-                      </div>
-                    </div>
-                  )}
-                  {showEditForm && (
-                    <div className="col py-3">
-                      {/* modifier */}
-                      <h3>Modifier un utilisateurs :</h3>
-                      <form onSubmit={handleUpdate}>
+                      <form onSubmit={handleAdd}>
                         <input
                           required
                           className="mt-1"
                           type="text"
                           placeholder="Nom :"
-                          value={editUser}
-                          onChange={handleUpdateNom}
+                          value={newUser}
+                          onChange={handleChangeNom}
                         />
                         <br />
                         <input
@@ -268,37 +229,84 @@ function App() {
                           required
                           className="mt-1"
                           placeholder="Email :"
-                          value={editEmail}
-                          onChange={handleUpdateEmail}
+                          value={newEmail}
+                          onChange={handleChangeEmail}
                         />{" "}
                         <input
                           required
                           className="mt-1"
                           type="number"
                           placeholder="Téléphones :"
-                          value={editTel}
-                          onChange={handleUpdapteTel}
+                          value={newTel}
+                          onChange={handleChangeTel}
                         />
                         <br />
-                        <button type="submit" className="btn btn-primary mt-2">
+                        <button
+                          type="submit"
+                          className="btn btn-primary mt-2 mr-2"
+                        >
                           Valider
                         </button>{" "}
                         <button
                           className="btn btn-danger x_close mt-2"
-                          onClick={() => setShowEditForm(false)}
+                          onClick={() => setShowForm(false)}
                         >
                           Annuler
                         </button>
                       </form>
                     </div>
-                  )}
-                </div>
+                  </div>
+                )}
+                {showEditForm && (
+                  <div className="col py-3">
+                    {/* modifier */}
+                    <h3>Modifier un utilisateurs :</h3>
+                    <form onSubmit={handleUpdate}>
+                      <input
+                        required
+                        className="mt-1"
+                        type="text"
+                        placeholder="Nom :"
+                        value={editUser}
+                        onChange={handleUpdateNom}
+                      />
+                      <br />
+                      <input
+                        type="email"
+                        required
+                        className="mt-1"
+                        placeholder="Email :"
+                        value={editEmail}
+                        onChange={handleUpdateEmail}
+                      />{" "}
+                      <input
+                        required
+                        className="mt-1"
+                        type="number"
+                        placeholder="Téléphones :"
+                        value={editTel}
+                        onChange={handleUpdapteTel}
+                      />
+                      <br />
+                      <button type="submit" className="btn btn-primary mt-2">
+                        Valider
+                      </button>{" "}
+                      <button
+                        className="btn btn-danger x_close mt-2"
+                        onClick={() => setShowEditForm(false)}
+                      >
+                        Annuler
+                      </button>
+                    </form>
+                  </div>
+                )}
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+    // </div>
   );
 }
 
