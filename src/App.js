@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "font-awesome/css/font-awesome.min.css";
+import { ThemeContext, themes } from "./ThemeContext";
+import ToggleDark from "./toggleDark";
 
 const title = "TP App";
 
@@ -20,6 +22,8 @@ function App() {
   const [editUser, setEditUser] = useState("");
   const [editEmail, setEditEmail] = useState("");
   const [editTel, setEditTel] = useState("");
+  // dark theme
+  const [darkMode, setDarkMode] = React.useState(true);
 
   useEffect(() => {
     fetch("https://623d08d37efb5abea689dd60.mockapi.io/users")
@@ -162,6 +166,16 @@ function App() {
               >
                 Ajouter un nouvel utilisateur
               </span>
+              <ThemeContext.Consumer>
+                {({ changeTheme }) => (
+                  <ToggleDark
+                    toggleDark={() => {
+                      setDarkMode(!darkMode);
+                      changeTheme(darkMode ? themes.light : themes.dark);
+                    }}
+                  />
+                )}
+              </ThemeContext.Consumer>
             </h2>
           </div>
         </div>

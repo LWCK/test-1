@@ -71,3 +71,15 @@ h2{
   font-weight: bold
 }
 /* .btn{} */
+
+
+.white-content {
+  background: #181818;
+  color: white;
+  background-image: url('./img/bg.jpg');
+  min-width: 100%;
+  min-height: 100vh;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
